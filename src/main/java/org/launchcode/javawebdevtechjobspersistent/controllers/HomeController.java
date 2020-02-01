@@ -17,8 +17,8 @@ import java.util.List;
  */
 @Controller
 public class HomeController {
-    @Autowired
-    private EmployerRepository employerRepository;
+//    @Autowired
+//    private EmployerRepository employerRepository;
 
     @Autowired
     private SkillRepository skillRepository;
@@ -36,7 +36,7 @@ public class HomeController {
     public String displayAddJobForm(Model model) {
         model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
-        model.addAttribute("employers", employerRepository.findAll());
+        //model.addAttribute("employers", employerRepository.findAll());
         model.addAttribute("skills", skillRepository.findAll());
         return "add";
     }
