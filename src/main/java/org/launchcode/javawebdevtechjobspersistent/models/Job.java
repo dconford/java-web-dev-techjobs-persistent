@@ -11,15 +11,15 @@ public class Job extends AbstractEntity{
     @NotNull(message = "Employer is Required!")
     private Employer employer;
 
-
-    private Skill skills;
+    @ManyToOne
+    private Skill skill;
 
     public Job() {
     }
 
     public Job(Employer anEmployer, Skill someSkills) {
         this.employer = anEmployer;
-        this.skills = someSkills;
+        this.skill = someSkills;
     }
 
     // Getters and setters.
@@ -32,11 +32,11 @@ public class Job extends AbstractEntity{
         this.employer = employer;
     }
 
-    public Skill getSkills() {
-        return skills;
+    public Skill getSkill() {
+        return skill;
     }
 
-    public void setSkills(Skill skills) {
-        this.skills = skills;
+    public void setSkill(Skill skill) {
+        this.skill = skill;
     }
 }
