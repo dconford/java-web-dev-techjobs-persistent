@@ -8,6 +8,7 @@
 <nav th:replace="fragments :: page-header"></nav>
 
 <div class="job-listing">
+    <span type ="hidden" th:field="${job}"></span>
     <p th:text="${'ID: ' + job.id}"></p>
     <p th:text="${'Name: ' + job.name}"></p>
     <p>
