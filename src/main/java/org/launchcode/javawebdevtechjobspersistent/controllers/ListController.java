@@ -1,8 +1,11 @@
 package org.launchcode.javawebdevtechjobspersistent.controllers;
 
 import org.launchcode.javawebdevtechjobspersistent.models.Job;
+import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.JobRepository;
+import org.launchcode.javawebdevtechjobspersistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +25,14 @@ public class ListController {
     @Autowired
     private JobRepository jobRepository;
 
+    @Autowired
+    private EmployerRepository employerRepository;
+
+    @Autowired
+    private SkillRepository skillRepository;
+
     static HashMap<String, String> columnChoices = new HashMap<>();
+    static HashMap<String, Iterable> tableChoices = new HashMap<>();
 
     public ListController () {
 
@@ -30,10 +40,32 @@ public class ListController {
         columnChoices.put("employer", "Employer");
         columnChoices.put("skill", "Skill");
 
+        //tableChoices.put("all", "View All");
+        //tableChoices.put("employer", employerRepository.findAll());
+        //tableChoices.put("skill", skillRepository.findAll());
+
     }
+
+//    @RequestMapping(value = "")
+//    public String list(Model model) {
+//        model.addAttribute("columns", columnChoices);
+//        model.addAttribute("tableChoices", tableChoices);
+//        model.addAttribute("employers", JobData.getAllEmployers());
+//        model.addAttribute("locations", JobData.getAllLocations());
+//        model.addAttribute("positions", JobData.getAllPositionTypes());
+//        model.addAttribute("skills", JobData.getAllCoreCompetency());
+//
+//        return "list";
+//    }
 
     @RequestMapping("")
     public String list(Model model) {
+
+        model.addAttribute("columns", columnChoices);
+        model.addAttribute("skills", skillRepository.findAll());
+        model.addAttribute("employers", employerRepository.findAll());
+
+        //model.addAttribute("tableChoices", tableChoices);
 
         return "list";
     }
@@ -55,23 +87,21 @@ public class ListController {
 }
 
 /*
-@GetMapping
-    public String displayEvents(@RequestParam(required = false) Integer categoryId, Model model) {
-
-        if (categoryId == null) {
-            model.addAttribute("title", "All Events");
-            model.addAttribute("events", eventRepository.findAll());
-        } else {
-            Optional<EventCategory> result = eventCategoryRepository.findById(categoryId);
-            if (result.isEmpty()) {
-                model.addAttribute("title", "Invalid Category ID: " + categoryId);
-            } else {
-                EventCategory category = result.get();
-                model.addAttribute("title", "Events in category: " + category.getName());
-                model.addAttribute("events", category.getEvents());
-            }
-        }
-
-        return "events/index";
-    }
+<tr>
+        <td>
+            <li>
+                <a th:href="@{/list/jobs(column='All',value='View All')}">View All</a>
+            </li>
+        </td>
+        <td>
+            <li th:each="employer : ${employers}">
+                <a th:href="@{/list/jobs(column=employer,value=${employer.name})}" th:text="${employer.name}"></a>
+            </li>
+        </td>
+        <td>
+            <li th:each="skill : ${skills}">
+                <a th:href="@{/list/jobs(column=skill,value=${skill.name})}" th:text="${skill.name}"></a>
+            </li>
+        </td>
+    </tr>
  */

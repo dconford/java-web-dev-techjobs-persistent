@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
+
+<p th:text="${errors}" style="color:red;"></p>
 <body class="container  body-content">
 <h1>Add Employer</h1>
 
@@ -9,14 +11,15 @@
 <form method="post" style="max-width:600px;">
     <div class="form-group">
         <label th:for="name">Employer Name</label>
-        <input class="form-control" th:field="${employer.name}" />
-        <span th:errors="${employer.name}" class="error"></span>
+        <input class="form-control" th:field="${employer.name}">
+
+        <p class="error" th:errors="${employer.name}"></p>
     </div>
 
     <div class="form-group">
         <label th:for="location">Employer Location</label>
         <input class="form-control" th:field="${employer.location}" />
-        <span th:errors="${employer.location}" class="error"></span>
+        <p th:errors="${employer.location}" class="error"></p>
     </div>
 
     <input type="submit" value="Add Employer" />
