@@ -50,9 +50,6 @@ public class HomeController {
         return "add";
     }
 
- // Sort.by(Sort.Direction.ASC,"name")
-// List<Passenger> passengers = repository.findAll(Sort.by(Sort.Direction.ASC, "seatNumber"));
-    //@PostMapping("add")
     @RequestMapping(value = "add", method = RequestMethod.POST, params = {"employerId"})
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                     Errors errors, Model model, int employerId) {
@@ -60,10 +57,14 @@ public class HomeController {
         if (result.isEmpty()) {
             model.addAttribute("title", "No Employer Found, Try Again");
             model.addAttribute(new Job());
-            model.addAttribute("employers", employerRepository.findAll());
+            model.addAttribute("employers", employerRepository.findAllOrderByName());
             model.addAttribute("skills", skillRepository.findAll());
             return "add";
         }
+//          else if (errors.hasErrors()) {
+//            model.addAttribute("title", "Add Job");
+//              return "/add";
+//        }
 //        else if (errors.hasErrors()) {
 //            model.addAttribute(errors);
 //            //model.addAttribute(new Job());
@@ -79,7 +80,6 @@ public class HomeController {
         }
     }
 
-    //@PostMapping("add")
     @RequestMapping(value = "add", method = RequestMethod.POST, params = {"employerId", "skills"})
     public String processAddJobForm(@ModelAttribute @Valid Job newJob, Errors errors,
                                     Model model, @RequestParam int employerId, @RequestParam List<Integer> skills) {
@@ -92,6 +92,10 @@ public class HomeController {
             return "add";
         }
 //        else if (errors.hasErrors()) {
+//            model.addAttribute("title", "Add Job");
+//            return "/add";
+//        }
+//        else if (errors.hasErrors()) {
 //            model.addAttribute(errors);
 //            model.addAttribute("employers", employerRepository.findAll());
 //            model.addAttribute("skills", skillRepository.findAll());
@@ -102,55 +106,11 @@ public class HomeController {
             newJob.setEmployer(employer);
 
             List<Skill> skillsList = (List<Skill>) skillRepository.findAllById(skills);
-            //if (!skillsList.isEmpty()) {
-                newJob.setSkills(skillsList);
-            //}
+            newJob.setSkills(skillsList);
             jobRepository.save(newJob);
             return "redirect:";
         }
     }
-
-/*
-@RequestMapping(value = "add", method = RequestMethod.POST, params = {"employerId", "skills"})
-    public String processAddJobForm(@ModelAttribute @Valid Job newJob,
-                                    Errors errors, Model model, @RequestParam int employerId,
-                                    @RequestParam(required = false) List<Integer> skills) {
-
- */
-
-
-
-// 2       if (errors.hasErrors()) {
-// 2           model.addAttribute(errors);
-// 2           model.addAttribute("employers", employerRepository.findAll());
-// 2           model.addAttribute("skills", skillRepository.findAll());
-// 2           return "/add";
-// 2       } else
-// 2           {
-
-
-// 1           Optional<Employer> result = employerRepository.findById(employerId);
-// 1           if (result.isEmpty()) {
-// 1               model.addAttribute("title", "No Employer Found, Try Again");
-// 1               model.addAttribute(new Job());
-// 1               model.addAttribute("employers", employerRepository.findAll());
-// 1               model.addAttribute("skills", skillRepository.findAll());
-// 1               return "/add";
-// 1           }
-
-
-//            Employer employer = result.get();
-//            newJob.setEmployer(employer);
-//
-//            List<Skill> skillsList = (List<Skill>) skillRepository.findAllById(skills);
-//            if (!skillsList.isEmpty()) {
-//                newJob.setSkills(skillsList);
-//            }
-//            jobRepository.save(newJob);
-//            return "redirect:";
-//            }
-
-
 
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {

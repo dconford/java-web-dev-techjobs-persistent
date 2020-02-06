@@ -12,17 +12,12 @@
 </div>
 
 <table class="centeredTable">
-    <tr>
-        <th>All</th>
-        <th>Employer</th>
-        <th>Skill</th>
-    </tr>
 
-<!--    <tr>-->
-<!--        <th:block th:each="column : ${columns}">-->
-<!--            <th th:text = "${column.value}"></th>-->
-<!--        </th:block>-->
-<!--    </tr>-->
+    <tr>
+        <th:block th:each="column : ${columns}">
+            <th th:text = "${column.value}"></th>
+        </th:block>
+    </tr>
 
     <tr>
         <td>

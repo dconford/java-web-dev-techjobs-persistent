@@ -59,32 +59,6 @@ public class JobData {
         return theValue;
     }
 
-
-    /**
-     *
-
-     public static ArrayList<Job> findByValue(String value, Iterable<Job> allJobs) {
-        ArrayList<Job> results = new ArrayList<>();
-
-     for (Job job : allJobs) {
-
-            if (job.getName().toLowerCase().contains(value.toLowerCase())) {
-                results.add(job);
-            } else if (job.getEmployer().toString().toLowerCase().contains(value.toLowerCase())) {
-                results.add(job);
-            } else if (job.getSkills().toString().toLowerCase().contains(value.toLowerCase())) {
-                results.add(job);
-            }
-     }
-     return results;
-     }
-     * Search all Job fields for the given term.
-     *
-     * @param value The search term to look for.
-     * @param allJobs The list of jobs to search.
-     * @return      List of all jobs with at least one field containing the value.
-     *
-     */
     public static ArrayList<Job> findByValue(String value, Iterable<Job> allJobs) {
 
         ArrayList<Job> results = new ArrayList<>();

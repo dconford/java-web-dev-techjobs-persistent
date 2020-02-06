@@ -24,6 +24,7 @@ public class SearchController {
     @RequestMapping("")
     public String search(Model model) {
         model.addAttribute("columns", columnChoices);
+        model.addAttribute("radiochek", "all");
         return "search";
     }
 
@@ -36,31 +37,10 @@ public class SearchController {
             jobs = JobData.findByColumnAndValue(searchType, searchTerm, jobRepository.findAll());
         }
         model.addAttribute("columns", columnChoices);
+        model.addAttribute("radiochek", searchType);
         model.addAttribute("title", "Jobs with " + columnChoices.get(searchType) + ": " + searchTerm);
         model.addAttribute("jobs", jobs);
 
         return "search";
     }
 }
-
-/*
-@GetMapping
-    public String displayEvents(@RequestParam(required = false) Integer categoryId, Model model) {
-
-        if (categoryId == null) {
-            model.addAttribute("title", "All Events");
-            model.addAttribute("events", eventRepository.findAll());
-        } else {
-            Optional<EventCategory> result = eventCategoryRepository.findById(categoryId);
-            if (result.isEmpty()) {
-                model.addAttribute("title", "Invalid Category ID: " + categoryId);
-            } else {
-                EventCategory category = result.get();
-                model.addAttribute("title", "Events in category: " + category.getName());
-                model.addAttribute("events", category.getEvents());
-            }
-        }
-
-        return "events/index";
-    }
- */

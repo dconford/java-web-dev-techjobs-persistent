@@ -40,23 +40,8 @@ public class ListController {
         columnChoices.put("employer", "Employer");
         columnChoices.put("skill", "Skill");
 
-        //tableChoices.put("all", "View All");
-        //tableChoices.put("employer", employerRepository.findAll());
-        //tableChoices.put("skill", skillRepository.findAll());
-
     }
 
-//    @RequestMapping(value = "")
-//    public String list(Model model) {
-//        model.addAttribute("columns", columnChoices);
-//        model.addAttribute("tableChoices", tableChoices);
-//        model.addAttribute("employers", JobData.getAllEmployers());
-//        model.addAttribute("locations", JobData.getAllLocations());
-//        model.addAttribute("positions", JobData.getAllPositionTypes());
-//        model.addAttribute("skills", JobData.getAllCoreCompetency());
-//
-//        return "list";
-//    }
 
     @RequestMapping("")
     public String list(Model model) {
@@ -64,8 +49,6 @@ public class ListController {
         model.addAttribute("columns", columnChoices);
         model.addAttribute("skills", skillRepository.findAll());
         model.addAttribute("employers", employerRepository.findAll());
-
-        //model.addAttribute("tableChoices", tableChoices);
 
         return "list";
     }
@@ -85,23 +68,3 @@ public class ListController {
         return "list-jobs";
     }
 }
-
-/*
-<tr>
-        <td>
-            <li>
-                <a th:href="@{/list/jobs(column='All',value='View All')}">View All</a>
-            </li>
-        </td>
-        <td>
-            <li th:each="employer : ${employers}">
-                <a th:href="@{/list/jobs(column=employer,value=${employer.name})}" th:text="${employer.name}"></a>
-            </li>
-        </td>
-        <td>
-            <li th:each="skill : ${skills}">
-                <a th:href="@{/list/jobs(column=skill,value=${skill.name})}" th:text="${skill.name}"></a>
-            </li>
-        </td>
-    </tr>
- */

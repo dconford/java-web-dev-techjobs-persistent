@@ -40,20 +40,3 @@ public class Skill extends AbstractEntity {
 }
 
 
-/*
- @ManyToOne
-    private Employer employer;
-
-    @ManyToMany
-    @JoinTable
-    private List<Skill> skills = new ArrayList<>();
-
-    public Job() {
-    }
-
-    public Job(Employer employer, List<Skill> skills) {
-        this.employer = employer;
-        this.skills = skills;
-    }
- */
-
