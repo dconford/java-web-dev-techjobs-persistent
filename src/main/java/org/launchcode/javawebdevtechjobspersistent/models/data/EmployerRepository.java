@@ -15,5 +15,6 @@ public interface EmployerRepository extends CrudRepository<Employer, Integer> {
 
     @Query("FROM Employer ORDER BY name ASC")
     List<Employer> findAllOrderByName();
+    //User findByUsername(String username)
 }
 
