@@ -11,9 +11,6 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface EmployerRepository extends CrudRepository<Employer, Integer> {
+public interface EmployerRepository extends CrudRepository<Employer, Integer>, PagingAndSortingRepository {
 
-    @Query("FROM Employer ORDER BY name ASC")
-    List<Employer> findAllOrderByName();
 }
-

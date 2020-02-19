@@ -54,7 +54,7 @@ public class JobData {
             theValue = job.getEmployer().toString();
         } else {
             theValue = job.getSkills().toString();
-        }
+        } 
 
         return theValue;
     }
