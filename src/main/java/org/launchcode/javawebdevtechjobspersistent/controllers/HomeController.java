@@ -53,8 +53,10 @@ public class HomeController {
     public String displayAddJobForm(Model model) {
         model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
-        model.addAttribute("employers", employerRepository.findAll());
-        model.addAttribute("skills", skillRepository.findAll());
+        //findAll(Sort.by(Sort.Direction.ASC, "seatNumber"))
+        model.addAttribute("employers", employerRepository.findAll(Sort.by("name")));
+        //model.addAttribute("employers", employerRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll(Sort.by("name")));
         return "add";
     }
 

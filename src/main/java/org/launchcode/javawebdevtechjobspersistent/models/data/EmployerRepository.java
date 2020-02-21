@@ -11,6 +11,12 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface EmployerRepository extends CrudRepository<Employer, Integer>, PagingAndSortingRepository {
+public interface EmployerRepository extends CrudRepository<Employer, Integer>, PagingAndSortingRepository<Employer, Integer> {
 
+
+   // List<Passenger> passengers = repository.findAll(Sort.by(Sort.Direction.ASC, "seatNumber"));
+//    @Query("FROM Employer ORDER BY name ASC")
+ //   <List>Employer findAllByOrderByName();
+   // <List>Employer findByOrderByName(String employer.name);
+//    User findByUsername(String username)
 }
